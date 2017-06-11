@@ -2,7 +2,6 @@ body{
 	background-color: #f6f6f6;
 }
 
-
 .box-inner{
 	width:1190px;
 	margin:0 auto;
@@ -21,7 +20,7 @@ a:hover{
 .sp-slash{
 	padding: 0 3px;
 }
-/*----------TOP------------*/
+/*-- start 顶部菜单--*/
 #top-nav{
 	border-bottom: 1px solid #ddd;
 	background-color:#e3e4e5;
@@ -40,7 +39,7 @@ a:hover{
 	float: left;
 	margin: 0px;
 }
-#top-nav .dropdown{
+.dropdown{
 	height: 30px;
 	line-height: 30px;
 	padding: 0 7px;
@@ -48,7 +47,7 @@ a:hover{
 	position: relative;
 	float: left;
 }
-#top-nav .dropdown-list{
+.dropdown-list{
 	display: none;
 	padding: 10px;
 	background-color: #fff;
@@ -61,162 +60,163 @@ a:hover{
 	z-index: 999;
 	box-shadow: 1px 1px 2px rgba(0,0,0,.1);
 }
-#top-nav .dropdown:hover{
+.dropdown:hover{
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border-bottom: none;
 }
-#top-nav .dropdown:hover .dropdown-list{
+.dropdown:hover .dropdown-list{
 	display: block;
 }
 
 
-/*定位*/
+/*-- 定位 --*/
 
-#top-nav .user-location{
+.user-location{
 	float: left;
 	margin-left: 200px;
 }
-#top-nav .location-list{
+.location-list{
 	width: 300px;
 }
-#top-nav .location-list li{
+.location-list li{
 	width: 60px;
 }
-#top-nav .location-list .item{
+.location-list .item{
 	padding: 5px 8px;
 }
-#top-nav .location-list .item:hover{
+.location-list .item:hover{
 	background-color: #f4f4f4;
 	color: #f10215;
 }
-#top-nav .location-list .item.selected{
+.location-list .item.selected{
 	background-color: #f10215;
 	color:#fff;
 }
 
-/*用户功能*/
-
-#top-nav .user-func{
+/*-- 用户功能 --*/
+.user-func{
 	float:right;
 }
-#top-nav .user-func .iconfont{
+.user-func .iconfont{
 	margin-left: 3px;
 }
-#top-nav .user-func-list{
+.user-func-list{
 	padding: 0 7px;
 	border: 1px solid transparent;
 }
-#top-nav .user-func-list a{
+.user-func-list a{
 	height: 30px;
 	line-height: 30px;
 }
-#top-nav .link-login{
+.link-login{
 	font-size: 11px;
 }
-#top-nav .link-regist{
+.link-regist{
 	color: #c81623;
 }
 
 #top-nav .spacer{
 	margin: 11px 3px 0;
 }
-#top-nav .myjd{
+.myjd{
 	width: 260px;
 	padding: 0px;
 }
-#top-nav .myjd ul{
+.myjd ul{
 	overflow: hidden;
   padding: 5px 15px;
   border-bottom: 1px solid #ccc;
 }
-#top-nav .myjd ul:last-of-type{
+.myjd ul:last-of-type{
 	border-bottom: none;
 }
-#top-nav .myjd ul li{
+.myjd ul li{
 	width: 115px;
 }
-#top-nav .myjd ul:last-of-child{
+.myjd ul:last-of-child{
 	border-bottom: none;
 }
 
-#top-nav .cli-service{
+.cli-service{
 	width: 170px;
 	padding: 10px 0;
 	right: -1px;
 	left:auto;
 }
-#top-nav .dl dl{
+.dl dl{
 	overflow: hidden;
 	margin: 0;
 }
-#top-nav .cli-service dl{
+.cli-service dl{
 	border-bottom: 1px solid #ccc;
 	padding-bottom: 5px;
 	
 }
-#top-nav .cli-service dd{
+.cli-service dd{
 	width: 70px;
 	padding-left:15px;
 }
-#top-nav .cli-service dt{
+.cli-service dt{
 	padding-left:15px;
 }
-#top-nav .dl dt{
+.dl dt{
 	font-weight: bold;
 	color: #666;
 }
-#top-nav .dl dd{
+.dl dd{
 	line-height: 24px;
 } 
-#top-nav .dl .item{
+.dl .item{
 	margin: 0;
 	padding: 0;
 }
-#top-nav .dl dl:last-of-type{
+.dl dl:last-of-type{
 	border: none;
 }
 
-#top-nav .web-nav{
+.web-nav{
 	width: 1158px;
 	right: -72px;
 	left: auto;
 	padding: 15px;
 }
-#top-nav .web-nav dl{
+.web-nav dl{
 	float: left;
 	border-right: 1px solid #ccc;
 }
-#top-nav .web-nav dd{
+.web-nav dd{
 	width: 80px;
 }
 
-#top-nav .theme{
+.theme{
 	width: 344px;
 }
-#top-nav .theme dl{
+.theme dl{
 	padding-left: 5px;
 }
 
-#top-nav .industry{
+.industry{
 	width: 250px;
 	padding-left: 20px;
 }
-#top-nav .life{
+.life{
 	width: 250px;
 	padding-left:20px;
 }
-#top-nav .collection{
+.collection{
 	width: 250px;
 	padding-left: 20px;
 }
+/*-- end 顶部菜单--*/
 
-/*-------------HEADER-------------*/
+/*-- start 头部 --*/
 #header .box-inner{
 	height: 140px;
 	position: relative;	
 	overflow: visible;
 }
+
 #logo{
 	width: 190px;
 	height: 170px;
@@ -232,18 +232,19 @@ a:hover{
 	background: url(../img/logo.png) no-repeat;
 	background-size:190px 170px;
 }
-#header .search,#header .search-form,#header .serach-words,#header .mycart,#header .main-nav{
+
+.search,.search-form,.serach-words,.mycart,.main-nav{
 	float: left;
 }
-#header .search{
+.search{
 	width: 550px;
 	margin: 25px 0 0 320px; 
 }
-#header .search-form{
+.search-form{
 	width: 550px;
 	position: relative;
 }
-#header .search-form input{
+.search-form input{
 	float: left;
 	width: 488px;
 	height: 23px;
@@ -253,7 +254,7 @@ a:hover{
 	outline: none;
 	margin-bottom: 5px;
 }
-#header .search-form button{
+.search-form button{
 	float: left;
 	width: 50px;
 	height: 35px;
@@ -262,23 +263,23 @@ a:hover{
 	background-color: #f10215;
 	cursor: pointer;
 }
-#header .search-form button .iconfont{
+.search-form button .iconfont{
 	font-size: 20px;
 	color: #fff;
 }
-#header .search-form .photo{
+.search-form .photo{
 	position: absolute;
 	left: 460px;
 	font-size: 24px;
 }
-#header .search-words a{
+.search-words a{
 	margin-right: 5px;
 }
-#header .mycart{
+.mycart{
 	margin:25px 0 0 30px;
 	position: relative;
 }
-#header .mycart-de{
+.mycart-de{
 	width: 188px;
 	height: 33px;
 	line-height: 33px;
@@ -290,15 +291,15 @@ a:hover{
 	overflow: hidden;
 	background-color: #fff;
 }
-#header .mycart a{
+.mycart a{
 	color: #f10215;
 	line-height: 33px;
 }
-#header .mycart .iconfont{
+.mycart .iconfont{
 	font-size: 20px;
 	color: #f10215;
 }
-#header .pdt-num{
+.pdt-num{
 	display: inline-block;
 	width: 12px;
 	height: 12px;
@@ -311,7 +312,7 @@ a:hover{
 	left: 138px;
 	top: 5px;
 }
-#header .products{
+.products{
 	display: none;
 	position: absolute;
 	right: 0px;
@@ -322,62 +323,62 @@ a:hover{
 	box-shadow: 1px 2px 1px rgba(0, 0, 0, .1);
 	z-index: 2;
 }
-#header .cart-empty{
+.cart-empty{
 	line-height: 49px;
 	text-align: center;
 	padding: 15px 0;
 }
-#header .cart-empty span{
+.cart-empty span{
 	display: inline-block;
 	width: 56px;
 	height: 49px;
 	background: url(../img/empty.png) no-repeat;
 	background-size: 56px 49px;
 }
-#header .mycart:hover .mycart-de{
+.mycart:hover .mycart-de{
 	border-color: #ccc;
 	border-bottom: none;
 	padding-bottom: 2px;
 }
-#header .mycart:hover .products{
+.mycart:hover .products{
 	display: block;
 }
 
-#header .main-nav{
+.main-nav{
 	width: 790px;
 	height: 40px;
 	margin:15px 0 0 200px;
 } 
-#header .main-nav ul{
+.main-nav ul{
 	float: left;
 }
-#header .main-nav li{
+.main-nav li{
 	float: left;
 	margin-left: 30px; 
 }
-#header .main-nav li a{
+.main-nav li a{
 	font-size: 16px;
 	line-height: 40px;
 	font-weight: bold;
 	color: #666;
 	position: relative;
 }
-#header .main-nav li a:hover{
+.main-nav li a:hover{
 	color: #c81623;
 }
-#header .subtitle{
+.subtitle{
 	width: 30px;
 	height: 18px;
 	position: absolute;
 	top:-8px;
 	left: 65px;
 }
-#header .main-nav .spacer{
+.main-nav .spacer{
 	margin: 15px -10px 0 20px;
 }
+/*-- end 头部 --*/
 
-
-/*---------------MID---------------*/
+/*-- start 主展示区 --*/
 
 #mid .box-inner{
 	height: 480px;
@@ -737,7 +738,7 @@ a:hover{
 	position: absolute;
 	bottom: -1px;
 	left: -2px;
-	transition: tranform .5s ease;
+	transition: transform .5s ease;
 }
 
 .news-content{
@@ -858,6 +859,7 @@ a:hover{
 .st-list-item-cvt a{
 	transition: transform .3s ease;
 }
+
 .service-text.selected{
 	border-top:2px solid #c81623;
 	line-height: 21px;
@@ -1009,6 +1011,7 @@ a:hover{
 	margin: 10px 0;
 }
 
+/*-- start 京东秒杀 --*/
 .sk-header{
 	background: url(../img/seckill_hd.png) no-repeat;
 	background-size:1190px 55px;
@@ -1208,7 +1211,9 @@ a:hover{
 .brand-sk-img{
 	width: 180px;
 }
+/*-- end 京东秒杀 --*/
 
+/*-- start  推荐--*/
 #gdthings{
 	margin-top: 40px;
 }
@@ -1335,19 +1340,14 @@ a:hover{
 }
 .ga-banner-indicator{
 	position: absolute;
+	padding:5px 10px 5px 0;
+	border-radius: 3px;
 	bottom:20px;
 	left: 50%;
-	margin-left: -22px;
 	z-index: 2;
+	background: rgba(0,0,0,.3);
 }
-.gb-bn-ind-btn{
-	float: left;
-	width: 8px;
-	height: 8px;
-	border-radius: 100%;
-	margin-right: 20px;
-	background-color:rgba(0,0,0,.3);
-}
+
 .gb-bn-ind-btn.hover{
 	background-color: #c81623;
 }
@@ -1435,7 +1435,9 @@ a:hover{
 .rcl-con-item a:hover p{
 	color: #c81623;
 }
+/*-- end 推荐 --*/
 
+/*-- start 领券中心 --*/
 #tickets{
 	margin-top: 30px;
 }
@@ -1536,6 +1538,9 @@ a:hover{
 	top: 30px;
 	z-index: 2;
 }
+/*-- end 领券中心 --*/
+
+/*-- start 广告 --*/
 .ad-line .box-inner{
 	overflow: hidden;
 }
@@ -1552,6 +1557,9 @@ a:hover{
 .ad-line a:hover{
 	opacity: 0.8;
 }
+/*-- end 广告 --*/
+
+/*-- start 享品质 --*/
 .module-header{
 	height: 45px;
 	line-height: 45px;
@@ -1570,6 +1578,7 @@ a:hover{
 .module-content{
 	overflow: hidden;
 }
+
 .quality-type{
 	float: left;
 	width: 800px;
@@ -1696,9 +1705,62 @@ a:hover{
 .module .box-inner{
 	overflow: hidden;
 } 
+
+.live-con{
+	position: relative;
+	width:100%;
+}
+.live-cover{
+	position: absolute;
+	width:100%;
+	height: 310px;
+	background-color: rgba(0,0,0,.5);
+	z-index: 10;
+}
+.live-list{
+	position: relative;
+}
+.live-item{
+	position: absolute;
+	height: 310px;
+}
+.live-item img{
+	display: inline-block;
+	width: 100%;
+	height: 310px;
+}
+.live-banner-slide{
+	display: block;
+	position: absolute;
+	width: 25px;
+	height: 50px;
+	top:50%;
+	margin-top: -25px;
+	line-height: 50px;
+	text-align: center;
+	background-color: rgba(0,0,0,.8);
+}
+.live-banner-slide .iconfont{
+	font-size: 15px;
+}
+#live-slide-pre{
+	left:0;
+}
+#live-slide-next{
+	right:0;
+}
+.live-banner-indicator{
+	position: absolute;
+	bottom: 20px;
+	left:50%;
+}
+/*-- end 享品质 --*/
+
+/*-- start 爱生活 --*/
 .module-con{
 	width: 1200px;
 }
+
 .love-module{
 	float: left;
 	width: 590px;
@@ -1911,6 +1973,9 @@ a:hover{
 .love-beauty .love-poster-title,.love-beauty .love-info{
 	color: #cd375e;
 }
+/*-- end 爱生活 --*/
+
+/*-- start 够特色 --*/
 #char .char-type{
 	width: 1190px;
 	height: 140px;
@@ -1938,6 +2003,9 @@ a:hover{
 	padding: 0 5px;
 	height: 60px;
 }
+/*-- end 够特色 --*/
+
+/*-- start 还没逛够 --*/
 #more{
 	overflow: hidden;
 }
@@ -1974,6 +2042,9 @@ a:hover{
 	margin-top: 5px;
 	color: #c81623;
 }
+/*-- end 还没逛够 --*/
+
+/*-- start 页脚 --*/
 #footer{
 	margin-top: 20px;
 	background-color: rgb(229,229,229);
@@ -2082,4 +2153,4 @@ a:hover{
 	background-color: #f7f7f7;
 	text-align: center;
 }
-
+/*-- end 页脚 --*/
