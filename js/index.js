@@ -1,10 +1,4 @@
 
-//懒加载
-Echo.init({
-  offset: 0,
-  throttle: 0
-})
-
 
 //tab
 function Tab(){};
