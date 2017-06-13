@@ -1,3 +1,35 @@
+
+//懒加载
+
+var lazyImgs = document.querySelectorAll('img[data-src]');
+    viewH = document.documentElement.clientHeight;
+function lazyload(){
+  Array.prototype.forEach.call(lazyImgs,function(item,index){
+    var rect;
+    if (item.dataset.src === '') {
+      return;
+    }
+    rect = item.getBoundingClientRect();
+    if (rect.bottom >=0 && rect.top < viewH) {
+      (function(item){
+        if (item.src == item.dataset.src) {
+          return;
+        }else{
+          item.src = item.dataset.src;
+        }
+      }(item))
+    }
+  });
+}
+lazyload();
+window.onscroll = function(){
+  lazyload();
+}
+
+
+
+
+
 //tab
 function Tab(){};
 Tab.prototype = {
