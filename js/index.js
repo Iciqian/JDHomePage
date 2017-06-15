@@ -1,3 +1,61 @@
+//事件兼容
+var EventUtil = {
+  addHandler: function(element, type, handler) {
+    if (element.addEventListener) {
+      element.addEventListener(type, handler, false);
+    } else if (element.attachEvent) {
+      element.attachEvent("on" + type, handler);
+    } else {
+      element['on' + type] = handler;
+    }
+  },
+  removeHandler: function(element, type, handler) {
+    if (element.removeEventListenr) {
+      element.removeEventListenr(type, handler, false);
+    } else if (element.detachEvent) {
+      element.detachEvent('on' + type, handler);
+    } else {
+      element('on' + type) = null;
+    }
+  },
+  getEvent: function(event) {
+    return event ? event : window.event;
+  },
+  getTarget: function(event) {
+    return event.target || event.srcElement;
+  },
+  preventDefault: function(event) {
+    if (event.preventDefault) {
+      event.preventDefault();
+    } else {
+      event.returnValue = false;
+    }
+  },
+    stopPropagation: function(event) {
+      if (event.stopPropagation) {
+        event.preventPropagation();
+      } else {
+        event.cancelBubble = true;
+      }
+    }
+};
+
+//加样式前缀
+function addStyle(obj,style,str){
+  style = style.charAt(0).toUpperCase() + style.substring(1);
+  var prefix = ['Moz','ms','webkit','o',''];
+  var prefixStyle = prefix.map(function(item,index){
+    if (item == '') {
+      style = style.toLowerCase();
+    }
+    return (item + style);
+  });
+  prefixStyle.forEach(function(value){
+    obj.style[value] = str;
+  });
+}
+
+//lazyload
 window.Echo = (function(window, document, undefined) {
 
   'use strict';
@@ -65,27 +123,26 @@ Tab.prototype = {
 		var that = this;
 		for (var i = 0; i < tabs.length; i++) {
 			tabs[i].ind = i;
-			tabs[i].onmouseover= function(e){
-				var e = window.event||e;
-				e.preventDefault();
-				e.stopPropagation();
-				//todo:ie
+			EventUtil.addHandler(tabs[i],'mouseover',function(event){
+        event = EventUtil.getEvent(event);
+				event.preventDefault();
+				event.stopPropagation();
 				for (var j = 0; j < ctns.length; j++) {
 					ctns[j].style.display = 'none';
 				}
 				var ctn = ctns[this.ind];
 				ctn.style.display = 'block';
+
 				if(fcline){
 					that.focus(this,fcline);
 				}
-			}
+			});
 		}
 	},
+
 	focus: function(tab,fcline){
-		var prefix = ['MozTranform','msTransform','webkitTrandform','oTransform','transform'];
-		prefix.forEach(function(value){
-			fcline.style[value] = 'translateX(' + (tab.offsetLeft - 1) + 'px)';
-		})
+    var str = 'translateX(' + (tab.offsetLeft - 1) + 'px)';
+		addStyle(fcline,'transform',str);
 	}
 };
 
@@ -132,29 +189,29 @@ Banner.prototype = {
 		this.blLis[0].style.opacity = 1;
 		this.showButton(this.index);
 
-    this.container.onmouseenter = function(){
+    EventUtil.addHandler(this.container,'mouseenter',function(){
     	that.stop();
-    }
-		this.container.onmouseleave = function(){
+    });
+		EventUtil.addHandler(this.container,'mouseleave',function(){
 			that.play();
-		}
-		this.nextBtn.onclick = function(){
+		});
+		EventUtil.addHandler(this.nextBtn,'click',function(){
 			that.nextBtnClick();
-		}
-		this.prevBtn.onclick = function(){
+		});
+		EventUtil.addHandler(this.prevBtn,'click',function(){
 			that.prevBtnClick();
-		}
+		});
 		for (var i = 0; i < this.indBtn.length; i++) {
 	    this.indBtn[i].ind = i;
-	    this.indBtn[i].onmouseover = function() {
-	        if (that.animated) {
-	            return;
-	        }
-	        if (this.className == 'banner-ind-btn hover') {
-	            return;
-	        }
-	        that.slide(that.index, this.ind);
-	    }
+      EventUtil.addHandler(this.indBtn[i],'mouseover',function(){
+        if (that.animated) {
+            return;
+        }
+        if (this.className == 'banner-ind-btn hover') {
+            return;
+        }
+        that.slide(that.index, this.ind);
+	    });
 		};
 		this.play();
 	},
@@ -183,6 +240,7 @@ Banner.prototype = {
     }
     go();
 	},
+
 	prevBtnClick: function(){
     if (this.animated) {
         return;
@@ -193,6 +251,7 @@ Banner.prototype = {
         this.slide(this.index, this.index - 1);
     }	
 	},
+
 	nextBtnClick: function(){
     if (this.animated) {
         return;
@@ -224,8 +283,8 @@ Banner.prototype = {
 	}
 };
 
-//主轮播
 
+//主轮播
 var conBanner = document.getElementsByClassName('con-banner')[0];
 var bannerList = document.getElementsByClassName('banner-list')[0];
 var mnLis = bannerList.getElementsByTagName('li');
@@ -278,22 +337,22 @@ var snPop = document.getElementById('sn-pop');
 var subNav = document.getElementById('subnav');
 for (var i = 0; i < cateItems.length; i++) {
   cateItems[i].index = i;
-  cateItems[i].onmouseover = function() {
+  EventUtil.addHandler(cateItems[i],'mouseover',function() {
       snPop.className = 'show';
       for (var j = 0; j < popItem.length; j++) {
           popItem[j].className = 'pop-item';
           cateItems[j].className = 'cate-items';
-      }
+      };
       cateItems[this.index].className += ' selected';
       popItem[this.index].className += ' show';
-  };
-}
-subNav.onmouseleave = function() {
+  });
+};
+EventUtil.addHandler(subNav,'mouseleave',function() {
   snPop.className = '';
   for (var i = 0; i < cateItems.length; i++) {
       cateItems[i].className = 'cate-items';
-  }
-}
+  };
+});
 
 //右侧模块菜单
 var stCvt = document.getElementsByClassName('st-list-item-cvt');
@@ -305,68 +364,81 @@ var scTab = document.getElementsByClassName('sc-tab');
 
 for (var i = 0; i < stCvt.length; i++) {
   stCvt[i].ind = i;
-  stCvt[i].onmouseenter = function() {
+  EventUtil.addHandler(stCvt[i],'mouseenter',function() {
     for (var j = 0; j < cvtText.length; j++) {
       cvtText[j].className = 'service-text';
       scTab[j].style.display = 'none';
-    }
-    sCon.style.transform = 'translateY(' + (-sCon.offsetHeight) + 'px)';
-    cvtText[this.ind].className = 'service-text selected';
-    scTab[this.ind].style.display = 'block';
+    };
+    var strH = 'translateY(' + (-sCon.offsetHeight) + 'px)'
+    addStyle(sCon,'transform',strH);
+    var ind = this.ind;
+    cvtText[ind].className = 'service-text selected';
+    scTab[ind].style.display = 'block';
+    var strT = 'translateY(' + (-cvtText[ind].offsetTop + 1) + 'px)';
     for (var p = 0; p < stLink.length; p++) {
-       stLink[p].style.transform = 'translateY(' + (-cvtText[this.ind].offsetTop + 1) + 'px)';
-    }
-  }
-}
-scClose.onclick = function() {
-  sCon.style.transform = 'translateY(' + (sCon.offsetHeight) + 'px)';
+       addStyle(stLink[p],'transform',strT);
+    }; 
+  });
+};
+EventUtil.addHandler(scClose,'click',function() {
+  var str = 'translateY(' + (sCon.offsetHeight) + 'px)';
+  addStyle(sCon,'transform',str);
   for (var j = 0; j < cvtText.length; j++) {
       cvtText[j].className = 'service-text';
-  }
+  };
   for (var p = 0; p < stLink.length; p++) {
-      stLink[p].style.transform = 'translateY(0px)';
-  }
-}
+      addStyle(stLink[p],'transform','translateY(0px)');
+  };
+});
 
 var czLink = document.getElementsByClassName('sc-tab-title-cz')[0].getElementsByTagName('a');
 var stlCz = document.getElementsByClassName('stl-cz')[0];
 var czItem = stlCz.getElementsByClassName('sc-tab-list-item');
+tabSlide(czLink, stlCz, czItem);
 
 var jpLink = document.getElementsByClassName('sc-tab-title-jp')[0].getElementsByTagName('a');
 var stlJp = document.getElementsByClassName('stl-jp')[0];
 var jpItem = stlJp.getElementsByClassName('sc-tab-list-item');
+tabSlide(jpLink, stlJp, jpItem);
 
 var jdLink = document.getElementsByClassName('sc-tab-title-jd')[0].getElementsByTagName('a');
 var stlJd = document.getElementsByClassName('stl-jd')[0];
 var jdItem = stlJd.getElementsByClassName('sc-tab-list-item');
+tabSlide(jdLink, stlJd, jdItem);
 
 var yxLink = document.getElementsByClassName('sc-tab-title-yx')[0].getElementsByTagName('a');
 var stlYx = document.getElementsByClassName('stl-yx')[0];
 var yxItem = stlYx.getElementsByClassName('sc-tab-list-item');
-
-
-tabSlide(czLink, stlCz, czItem);
-tabSlide(jpLink, stlJp, jpItem);
-tabSlide(jdLink, stlJd, jdItem);
 tabSlide(yxLink, stlYx, yxItem);
 
 function tabSlide(tLink, stl, item) {
     for (var i = 0; i < tLink.length; i++) {
         tLink[i].ind = i;
-        tLink[i].onmouseover = function() {
-            for (var j = 0; j < tLink.length; j++) {
-                tLink[j].className = '';
-            }
-            tLink[this.ind].className = 'st-hover';
-            var itemInd = item[this.ind]; 
-            var prefix = ['MozTranform','msTransform','webkitTrandform','oTransform','transform'];
-            prefix.forEach(function(value){
-            	stl.style[value] = 'translate(' + (-itemInd.offsetLeft + 10) + 'px)';
-            })
-           
-        }
-    }
-}
+        EventUtil.addHandler(tLink[i],'mouseover',function() {
+          for (var j = 0; j < tLink.length; j++) {
+              tLink[j].className = '';
+          };
+          tLink[this.ind].className = 'st-hover';
+          var itemInd = item[this.ind]; 
+          var str  = 'translate(' + (-itemInd.offsetLeft + 10) + 'px)';
+          	addStyle(stl,'transform',str);
+        });
+    };
+};
+
+//商品图片位移动画
+function slightMove(){};
+slightMove.prototype = {
+  init: function(obj){
+    var that = this;
+    this.objs = obj.objs;
+    this.offset = obj.offset;
+    this.effect = obj.effect;
+    EventUtil.addHandler(document,'mouseover', function(){
+      
+    })
+  }
+};
 
 //秒杀倒计时
 var cHour = document.getElementsByClassName('clock-hour')[0].getElementsByClassName('clock-text')[0];
@@ -376,14 +448,14 @@ var hour,minute,second;
 var lfTimer,lf;
 var leftTimer = function(year, month, day, hour, minute, second) {
    return (new Date(year, month - 1, day, hour, minute, second) - new Date());
-}
+};
 
 function checkTime(time) {
   if (time < 10) {
       time = '0' + time;
-  }
+  };
   return time;
-}
+};
 
 lfTimer = setInterval(function() {
   lf = leftTimer(2019, 5, 23, 23, 55, 00);
@@ -399,9 +471,9 @@ lfTimer = setInterval(function() {
 var pdtList = document.getElementsByClassName('pdt-list')[0];
 var psPre = document.getElementsByClassName('ps-pre')[0];
 var psNext = document.getElementsByClassName('ps-next')[0];
-psNext.addEventListener('click', function() {
-    pdtList.style.transform = 'translate(' + (-999) + 'px)';
-}, false)
-psPre.addEventListener('click', function() {
-    pdtList.style.transform = 'translate(' + 0 + 'px)';
-}, false)
+EventUtil.addHandler(psNext,'click',function() {
+    addStyle(pdtList,'transform','translate(-999px)');
+});
+EventUtil.addHandler(psPre,'click',function() {
+    addStyle(pdtList,'transform','translate(0px)');
+});
