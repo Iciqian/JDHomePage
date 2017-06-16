@@ -41,7 +41,7 @@ var EventUtil = {
 };
 
 //加样式前缀
-function addStyle(obj,style,str){
+function addStyle(element,style,str){
   style = style.charAt(0).toUpperCase() + style.substring(1);
   var prefix = ['Moz','ms','webkit','o',''];
   var prefixStyle = prefix.map(function(item,index){
@@ -51,7 +51,7 @@ function addStyle(obj,style,str){
     return (item + style);
   });
   prefixStyle.forEach(function(value){
-    obj.style[value] = str;
+    element.style[value] = str;
   });
 }
 
@@ -427,18 +427,43 @@ function tabSlide(tLink, stl, item) {
 };
 
 //商品图片位移动画
-function slightMove(){};
-slightMove.prototype = {
-  init: function(obj){
-    var that = this;
-    this.objs = obj.objs;
-    this.offset = obj.offset;
-    this.effect = obj.effect;
-    EventUtil.addHandler(document,'mouseover', function(){
-      
-    })
+var SlightMove = {
+  up: function(element,offset){
+    addStyle(element, 'transform', 'translateY(' + (-offset) + 'px');
+  },
+  left: function(element,offset){
+    addStyle(element, 'transform', 'translateX(' + (-offset) + 'px');
+  },
+  right: function(element,offset){
+    addStyle(element, 'transform', 'translateX(' + offset + 'px');
+  },
+  down: function(element,offset){
+    addStyle(element, 'transform', 'translateY(' + offset + 'px');
   }
 };
+
+EventUtil.addHandler(document, 'mouseover', function(event){
+  event = EventUtil.getEvent(event);
+  var target = EventUtil.getTarget(event);
+  if (target.className.indexOf('moveup') > -1) {
+    SlightMove.up(target,10);
+  }else if(target.className.indexOf('moveleft') > -1){
+    SlightMove.left(target,10);
+  }else if(target.className.indexOf('moveright') > -1){
+    SlightMove.right(target,10);
+  }
+});
+EventUtil.addHandler(document, 'mouseout', function(event){
+  event = EventUtil.getEvent(event);
+  var target = EventUtil.getTarget(event);
+  if (target.className.indexOf('moveup') > -1) {
+    SlightMove.up(target,0);
+  }else if(target.className.indexOf('moveleft') > -1){
+    SlightMove.left(target,0);
+  }else if(target.className.indexOf('moveright') > -1){
+    SlightMove.right(target,0);
+  }
+});
 
 //秒杀倒计时
 var cHour = document.getElementsByClassName('clock-hour')[0].getElementsByClassName('clock-text')[0];

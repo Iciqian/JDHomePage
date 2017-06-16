@@ -20,6 +20,9 @@ a:hover{
 .sp-slash{
 	padding: 0 3px;
 }
+.moveleft,.moveup,.moveright{
+	transition: transform 0.3s ease;
+}
 /*-- start 顶部菜单--*/
 #top-nav{
 	border-bottom: 1px solid #ddd;
@@ -1164,6 +1167,8 @@ a:hover{
 	height: 130px;
 	margin: 25px auto 10px;
 	display: block;
+	transition: transform 0.3s linear;
+	-webkit-transition: transform 0.3s linear;
 }
 .item-icon{
 	position: absolute;
